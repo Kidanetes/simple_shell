@@ -10,6 +10,7 @@ int main(int ac, char **argv){
 	int num_tokens = 0;
 	char *token;
 	int status, i;
+	pid_t pid;
 
 	/* declaring void variables */
 	(void)ac;
@@ -60,7 +61,7 @@ int main(int ac, char **argv){
 		{
 			exit(0);
 		}
-		pid_t pid = fork ();
+		pid = fork ();
 		
 		if (pid < 0)
 		{
