@@ -1,5 +1,6 @@
 #include "main.h"
 
+
 int main(int ac, char **argv){
 	char *prompt = "#cisfun$ ";
 	char *command = NULL, *command_copy = NULL;
@@ -68,9 +69,10 @@ int main(int ac, char **argv){
 		}
 		else if (pid == 0)
 		{
+			/* execute the command */
+			 execmd(argv);	
 
-		/* execute the command */
-		execmd(argv);
+
 		}
 		else
 		{

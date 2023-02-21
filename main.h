@@ -6,6 +6,8 @@
 #include <sys/stat.h>
 #include <sys/wait.h>
 
+extern char **environ;
+
 void execmd(char **argv);
 char *get_location(char *command);
 

@@ -1,5 +1,6 @@
 #include "main.h"
 
+
 void execmd(char **argv){
     char *cmd = NULL, *actual_command = NULL;
 
@@ -11,7 +12,7 @@ void execmd(char **argv){
         actual_command = get_location(cmd);
 
         /* execute the actual command with execve */
-        if (execve(actual_command, argv, NULL) == -1){
+        if (execve(actual_command, argv, environ) == -1){
             perror("Error:");
         }
     }
