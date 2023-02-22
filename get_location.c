@@ -1,66 +1,140 @@
 #include "main.h"
 
-char *get_location(char *command){
-    char *path, *path_copy, *path_token, *file_path;
-    int command_length, directory_length;
-    struct stat buffer;
-    
-    path = getenv("PATH");
+char *fill_path_dir(char *path);
+list_t *get_path_dir(char *path);
 
-    if (path){
-        /* Duplicate the path string -> remember to free up memory for this because strdup allocates memory that needs to be freed*/ 
-        path_copy = strdup(path);
-        /* Get length of the command that was passed */
-        command_length = strlen(command);
+/**
+ * get_location - Locates a command in the PATH.
+ * @command: The command to locate.
+ *
+ * Return: If an error occurs or the command cannot be located - NULL.
+ *         Otherwise - the full pathname of the command.
+ */
+char *get_location(char *command)
+{
+	char **path, *temp;
+	list_t *dirs, *head;
+	struct stat st;
 
+	path = _getenv("PATH");
+	if (!path || !(*path))
+		return (NULL);
 
-        /* Let's break down the path variable and get all the directories available*/
-        path_token = strtok(path_copy, ":");
+	dirs = get_path_dir(*path + 5);
+	head = dirs;
 
-        while(path_token != NULL){
-            /* Get the length of the directory*/
-            directory_length = strlen(path_token);
-	    
-            /* allocate memory for storing the command name together with the directory name */
-            file_path = malloc(command_length + directory_length + 2); /* NB: we added 2 for the slash and null character we will introduce in the full command */
-            /* to build the path for the command, let's copy the directory path and concatenate the command to it */
-            strcpy(file_path, path_token);
-            strcat(file_path, "/");
-            strcat(file_path, command);
-            strcat(file_path, "\0");
+	while (dirs)
+	{
+		temp = malloc(_strlen(dirs->dir) + _strlen(command) + 2);
+		if (!temp)
+			return (NULL);
 
-            /* let's test if this file path actually exists and return it if it does, otherwise try the next directory */
-            if (stat(file_path, &buffer) == 0){
-                /* return value of 0 means success implying that the file_path is valid*/
+		_strcpy(temp, dirs->dir);
+		_strcat(temp, "/");
+		_strcat(temp, command);
 
-                /* free up allocated memory before returning your file_path */
-                free(path_copy);
+		if (stat(temp, &st) == 0)
+		{
+			free_list(head);
+			return (temp);
+		}
 
-                return (file_path);
-            }
-            else{
-                /* free up the file_path memory so we can check for another path*/
-                free(file_path);
-                path_token = strtok(NULL, ":");
+		dirs = dirs->next;
+		free(temp);
+	}
 
-            }
-        
-        }
+	free_list(head);
 
-        /* if we don't get any file_path that exists for the command, we return NULL but we need to free up memory for path_copy */ 
-        free(path_copy);
+	return (NULL);
+}
 
-        /* before we exit without luck, let's see if the command itself is a file_path that exists */
-        if (stat(command, &buffer) == 0)
-        {
-            return (command);
-        }
+/**
+ * fill_path_dir - Copies path but also replaces leading/sandwiched/trailing
+ *		   colons (:) with current working directory.
+ * @path: The colon-separated list of directories.
+ *
+ * Return: A copy of path with any leading/sandwiched/trailing colons replaced
+ *	   with the current working directory.
+ */
+char *fill_path_dir(char *path)
+{
+	int i, length = 0;
+	char *path_copy, *pwd;
 
+	pwd = *(_getenv("PWD")) + 4;
+	for (i = 0; path[i]; i++)
+	{
+		if (path[i] == ':')
+		{
+			if (path[i + 1] == ':' || i == 0 || path[i + 1] == '\0')
+				length += _strlen(pwd) + 1;
+			else
+				length++;
+		}
+		else
+			length++;
+	}
+	path_copy = malloc(sizeof(char) * (length + 1));
+	if (!path_copy)
+		return (NULL);
+	path_copy[0] = '\0';
+	for (i = 0; path[i]; i++)
+	{
+		if (path[i] == ':')
+		{
+			if (i == 0)
+			{
+				_strcat(path_copy, pwd);
+				_strcat(path_copy, ":");
+			}
+			else if (path[i + 1] == ':' || path[i + 1] == '\0')
+			{
+				_strcat(path_copy, ":");
+				_strcat(path_copy, pwd);
+			}
+			else
+				_strcat(path_copy, ":");
+		}
+		else
+		{
+			_strncat(path_copy, &path[i], 1);
+		}
+	}
+	return (path_copy);
+}
 
-        return (NULL);
-    
-    }
+/**
+ * get_path_dir - Tokenizes a colon-separated list of
+ *                directories into a list_s linked list.
+ * @path: The colon-separated list of directories.
+ *
+ * Return: A pointer to the initialized linked list.
+ */
+list_t *get_path_dir(char *path)
+{
+	int index;
+	char **dirs, *path_copy;
+	list_t *head = NULL;
 
+	path_copy = fill_path_dir(path);
+	if (!path_copy)
+		return (NULL);
+	dirs = _strtok(path_copy, ":");
+	free(path_copy);
+	if (!dirs)
+		return (NULL);
 
-    return (NULL);
+	for (index = 0; dirs[index]; index++)
+	{
+		if (add_node_end(&head, dirs[index]) == NULL)
+		{
+			free_list(head);
+			free(dirs);
+			return (NULL);
+		}
+	}
+
+	free(dirs);
+
+	return (head);
 }
