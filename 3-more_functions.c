@@ -140,7 +140,7 @@ char **_which(char *foundpath)
  * @cnt: count of prompt
  * Return: 1
  */
-int child_process(char **av, char **args, char **env, int status_main, int cnt)
+int child_process(char **av, char **args, char **env, int status_main)
 {
 	pid_t pid;
 	int status;
@@ -158,7 +158,7 @@ int child_process(char **av, char **args, char **env, int status_main, int cnt)
 	{
 		if (execve(args[0], args, env) == -1)
 		{
-			_error(av[0], cnt, args[0]);
+			_error(av[0], args[0]);
 			free(args);
 			exit(1);
 		}
