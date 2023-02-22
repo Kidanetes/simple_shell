@@ -8,9 +8,9 @@
  */
 int *_error(char *argv, int count, char *args)
 {
-	char *number;
+	/**char *number;*/
 
-	number = _itoa(count, 10);
+	/*number = _itoa(count, 10);*/
 
 	write(2, argv, _strlen(argv));
 	write(2, ": ", 2);
