@@ -1,2 +1,2 @@
-# simple_shell
-team project about shell
+#Simple_shell
+group project about simple shell
