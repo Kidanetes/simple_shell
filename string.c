@@ -1,6 +1,4 @@
 #include "simple_shell.h"
-#include "simpleshell.h"
-
 /**
  *_puts - prints a string
  *@str: A pointer to an int that will be updated
