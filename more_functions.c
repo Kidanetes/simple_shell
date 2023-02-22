@@ -57,7 +57,7 @@ void func_printenv(char **environ)
 	int i = 0;
 
 	for (; environ[i] ; i++)
-		_puts(environ[i]); /*imprime todo el environment*/
+		_puts(environ[i]);
 }
 /**
  * handle_signal - prints new line and prompt when CTRL + C is passed as input
