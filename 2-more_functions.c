@@ -1,3 +1,4 @@
+#include "simple_shell.h"
 /**
  * _error - prints the error output of a file
  * @argv: name of program
