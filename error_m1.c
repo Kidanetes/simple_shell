@@ -6,7 +6,7 @@ char *error_2_exit(char **argv);
 char *error_2_cd(char **argv);
 char *error_2_syntax(char **argv);
 /**
- * error_env - Creates an error message for shellby_env errors.
+ * error_env - Creates an error message for shell_env errors.
  * @argv: An array of arguments passed to the command.
  *
  * Return: The error string.
