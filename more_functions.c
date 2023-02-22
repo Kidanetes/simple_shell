@@ -47,37 +47,7 @@ void *_calloc(unsigned int nmemb, unsigned int size)
 	return (p);
 
 }
-/**
- * _itoa - integer to ascii
- * @num: num
- * @base: base
- * Return: char
- */
-char *_itoa(int num, int base)
-{
-	static char *array = "0123456789abcdef";
-	static char buffer[50];
-	char sign = 0;
-	char *ptr;
-	unsigned long n = num;
 
-	if (num < 0)
-	{
-		n = -num;
-		sign = '-';
-	}
-	ptr = &buffer[49];
-	*ptr = '\0';
-
-	do      {
-		*--ptr = array[n % base];
-		n /= base;
-	} while (n != 0);
-
-	if (sign)
-		*--ptr = sign;
-	return (ptr);
-}
 /**
  * func_printenv - prints the current environment
  * @environ: environment variable
