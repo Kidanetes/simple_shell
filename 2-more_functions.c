@@ -2,11 +2,10 @@
 /**
  * _error - prints the error output of a file
  * @argv: name of program
- * @count: number of prompt
  * @args: command to be put in
  * Return: 0 on success
  */
-int *_error(char *argv, int number __attribute__((unused)), char *args)
+int *_error(char *argv, char *args)
 {
 	write(2, argv, _strlen(argv));
 	write(2, ": ", 2);
