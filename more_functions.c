@@ -24,10 +24,10 @@ char *_strdup(char *str)
 	return (s);
 }
 /**
- * _calloc - allocates memory for array
- * @nmemb: input parameter1
- * @size: input parameter2
- * Return: pointer
+ *_calloc -allocated memoria for nmeb elemn de zise bytes
+ *@nmemb: number of element in the array
+ *@size: bytes for each position in the array
+ *Return: pointer void
  */
 void *_calloc(unsigned int nmemb, unsigned int size)
 {
@@ -50,19 +50,17 @@ void *_calloc(unsigned int nmemb, unsigned int size)
 /**
  * func_printenv - prints the current environment
  * @environ: environment variable
- * Return: void
  */
 void func_printenv(char **environ)
 {
 	int i = 0;
 
 	for (; environ[i] ; i++)
-		_puts(environ[i]);
+		_puts(environ[i]); /*imprime todo el environment*/
 }
 /**
  * handle_signal - prints new line and prompt when CTRL + C is passed as input
  * @signal: name of sig
- * Return: void
  */
 void handle_signal(int signal)
 {
