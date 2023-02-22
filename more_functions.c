@@ -1,28 +1,27 @@
 #include "simple_shell.h"
 /**
- * _strdup -  copy the string given as a parameter
- * @str: input parameter
- * Return: pointer to copied string
+ * _strdup - copes a string to another
+ * @str: the array
+ * Return: pointer of sting copied
  */
 char *_strdup(char *str)
 {
-	int size, i = 0;
-	char *array;
+	int i, j;
+	char *s = NULL;
 
 	if (str == NULL)
+		return (0);
+	for (i = 0; str[i]; i++)
+		;
+	i++;
+	s = malloc(i * sizeof(char *));
+	if (!s)
 		return (NULL);
-	while (str[i] != '\0')
+	for (j = 0; j < i; j++)
 	{
-		i++;
+		s[j] = str[j];
 	}
-	size = i + 1;
-	array = malloc(size);
-	if (array == NULL)
-		return (NULL);
-	for (i = 0; i < size; i++, str++)
-		array[i] = *str;
-	array[i] = '\0';
-	return (array);
+	return (s);
 }
 /**
  * _calloc - allocates memory for array
@@ -32,17 +31,21 @@ char *_strdup(char *str)
  */
 void *_calloc(unsigned int nmemb, unsigned int size)
 {
+	char *p;
 	unsigned int i;
-	void *ptr;
 
 	if (nmemb == 0 || size == 0)
 		return (NULL);
-	ptr = malloc(nmemb * size);
-	if (ptr == NULL)
+
+	p = malloc(nmemb * size);
+	if (p == NULL)
 		return (NULL);
+
 	for (i = 0; i < nmemb * size; i++)
-		*((char *)(ptr) + i) = 0;
-	return (ptr);
+		p[i] = 0;
+
+	return (p);
+
 }
 /**
  * _itoa - integer to ascii
