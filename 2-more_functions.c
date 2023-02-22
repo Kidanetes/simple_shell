@@ -14,8 +14,8 @@ int *_error(char *argv, int count, char *args)
 
 	write(2, argv, _strlen(argv));
 	write(2, ": ", 2);
-	write(2, number, _strlen(number));
-	write(2, ": ", 2);
+	/*write(2, number, _strlen(number));*/
+	/*write(2, ": ", 2);*/
 	write(2, args, _strlen(args));
 	perror(" ");
 
