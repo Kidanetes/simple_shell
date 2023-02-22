@@ -60,3 +60,22 @@ int _stat(char **cmd, char **path)
 	free(path);
 	return (0);
 }
+/**
+ * search_path - gets the path to execute commands
+ * @environ: Environment variable
+ * Return: token_path
+ **/
+char **search_path(char **environ)
+{
+	int position = 0;
+	char **token_path;
+
+	for (; environ[position] != NULL ; position++)
+	{
+		if (environ[position][0] == 'P' && environ[position][2] == 'T')
+		{
+			token_path = _which(environ[position]);
+		}
+	}
+	return (token_path);
+}
