@@ -71,22 +71,17 @@ char **sparse_str(char *line, char **env)
 		token = strtok(NULL, TOK_DELIM);
 	}
 	if (tokens[0] == NULL)
-		tokens[posicion] = "\n"; /*si es nulo esa pos es un new line*/
-
-	/*COMPARA EL TOKENS[0]*/
+		tokens[posicion] = "\n"; 
 	if ((_strcmp(tokens[0], "exit") == 0) && tokens[1] == NULL)
 	{
-		free(line); /*LIBERA MEMORIA Y SALE DEL PROGRAMA*/
+		free(line); 
 		free(tokens);
 		exit(0);
 	}
 	if ((_strcmp(tokens[0], "env") == 0) && tokens[1] == NULL)
-		func_printenv(env);      /*Encuentra el enviroment*/
-
+		func_printenv(env);
 	return (tokens);
 }
-
-
 /**
  * prompt - prints '$' and waits for a user's input
  */
@@ -125,8 +120,8 @@ char **_which(char *foundpath)
 		return (NULL);
 	}
 
-	copy_path = _strdup(foundpath); /*copiar el string --> palabra PATH*/
-	tokens = strtok(copy_path, sparse); /*separar el string por un separador*/
+	copy_path = _strdup(foundpath);
+	tokens = strtok(copy_path, sparse);
 	while (tokens != NULL)
 	{
 		dir[i] = tokens;
@@ -136,8 +131,6 @@ char **_which(char *foundpath)
 
 	return (dir);
 }
-
-
 /**
  * child_process - executes a command if the path of it is an executable file
  * @args: the command to be executed
