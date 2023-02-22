@@ -27,7 +27,7 @@ int main(int ac __attribute__((unused)), char **av, char **env)
 			count += 1;
 			path = search_path(env); /*busca PATH en la variable environ*/
 			status = _stat(args, path);
-			child_process(av, args, env, status, count);
+			child_process(av, args, env, status);
 		}
 		else
 		{
