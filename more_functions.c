@@ -47,7 +47,6 @@ void *_calloc(unsigned int nmemb, unsigned int size)
 	return (p);
 
 }
-
 /**
  * func_printenv - prints the current environment
  * @environ: environment variable
