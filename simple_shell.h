@@ -22,7 +22,7 @@ int child_process(char **av, char **args, char **environ, int st, int countt);
 int _access(char *filename);
 char *_strcat(char *dest, char *src);
 char *_strcpy(char *dest, char *src);
-int _strlen(const char *s);
+int _strlen(char *s);
 int _strcmp(char *s1, char *s2);
 char *_strstr(char *str1, char *str2);
 char *_strdup(char *str);
