@@ -6,7 +6,7 @@
  * @args: command to be put in
  * Return: 0 on success
  */
-int *_error(char *argv,__attribute__((unused)) int number,  char *args)
+int *_error(char *argv,__attribute__((unused)) int number, char *args)
 {
 	write(2, argv, _strlen(argv));
 	write(2, ": ", 2);
@@ -15,7 +15,6 @@ int *_error(char *argv,__attribute__((unused)) int number,  char *args)
 
 	return (0);
 }
-
 /**
  * _stat - get file status
  * @cmd: pointo with commands
