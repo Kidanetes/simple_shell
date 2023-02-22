@@ -76,7 +76,7 @@ char *str_concat(char *s1, char *s2)
 		s2 = "";
 
 	size = (_strlen(s1) + _strlen(s2) + 1);
-	k = i;
+	k = _strlen(s1) - 1;
 	array = malloc(size);
 	if (array == NULL)
 		return (NULL);
