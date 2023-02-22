@@ -42,7 +42,6 @@ int _putchar(char c)
 {
 	return (write(1, &c, 1));
 }
-
 /**
  *str_concat - back a pointer to array
  *@s1: Array one
