@@ -67,18 +67,15 @@ int _strcmp(char *s1, char *s2)
  */
 char *str_concat(char *s1, char *s2)
 {
-	int i = 0, j = 0, size, k;
+	int i,size, k;
 	char *array;
 
 	if (s1 == NULL)
 		s1 = "";
 	if (s2 == NULL)
 		s2 = "";
-	for (; s1[i] != '\0'; i++)
-		;
-	for (; s2[j] != '\0'; j++)
-		;
-	size = i + j + 1;
+
+	size = (_strlen(s1) + _strlen(s2) + 1);
 	k = i;
 	array = malloc(size);
 	if (array == NULL)
