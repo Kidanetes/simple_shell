@@ -1,4 +1,6 @@
 #include "simple_shell.h"
+#include "simpleshell.h"
+
 /**
  *_puts - prints a string
  *@str: A pointer to an int that will be updated
@@ -15,6 +17,7 @@ void _puts(char *str)
 	}
 	_putchar('\n');
 }
+
 /**
  * _strlen - returns a string
  * @s: integer to be used
@@ -31,6 +34,7 @@ int _strlen(const char *s)
 	}
 	return ((i + 1));
 }
+
 /**
  * _putchar - writes the character c to stdout
  * @c: The character to print
@@ -42,6 +46,7 @@ int _putchar(char c)
 {
 	return (write(1, &c, 1));
 }
+
 /**
  *str_concat - back a pointer to array
  *@s1: Array one
@@ -84,6 +89,7 @@ char *str_concat(char *s1, char *s2)
 
 	return (dst);
 }
+
 /**
  * _strcmp - compare two strings
  * @s1: string one
