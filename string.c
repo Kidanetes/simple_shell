@@ -38,7 +38,7 @@ int _strlen(char *s)
 	{
 	}
 
-	return (i);
+	return (i + 1);
 }
 /**
  * _strcmp - compares two strings
