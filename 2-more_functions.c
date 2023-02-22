@@ -6,11 +6,11 @@
  * @args: command to be put in
  * Return: 0 on success
  */
-int *_error(char *argv, int count, char *args)
+int *_error(char *argv,  char *args)
 {
 	/**char *number;*/
 
-	/*number = _itoa(count, 10);*/
+	/*number = _itoa(count, 10); int count,*/
 
 	write(2, argv, _strlen(argv));
 	write(2, ": ", 2);
