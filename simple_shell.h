@@ -18,7 +18,7 @@ void func_printenv(char **env);
 char **_which(char *foundpath);
 char *_getenv(char *name, char **env);
 char *search_func(char **dir, char *cmd);
-int child_process(char **av, char **args, char **environ, int st, int countt);
+int child_process(char **av, char **args, char **environ, int st);
 int _access(char *filename);
 char *_strcat(char *dest, char *src);
 char *_strcpy(char *dest, char *src);
