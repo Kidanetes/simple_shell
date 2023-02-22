@@ -1,4 +1,38 @@
 #include "simple_shell.h"
+**
+ *_puts - prints a string
+ *@str: A pointer to an int that will be updated
+ *
+ *Return: void
+ */
+void _puts(char *str)
+{
+	int n;
+
+	for (n = 0 ; str[n] != '\0' ; n++)
+	{
+		_putchar(str[n]);
+	}
+	_putchar('\n');
+}
+
+/**
+ * _strlen - returns a string
+ * @s: integer to be used
+ * Return: length of string
+ */
+int _strlen(const char *s)
+{
+	int i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		i++;
+	}
+	return ((i + 1));
+}
+
 /**
  * _putchar - writes the character c to stdout
  * @c: The character to print
@@ -10,83 +44,67 @@ int _putchar(char c)
 {
 	return (write(1, &c, 1));
 }
+
 /**
- * _puts - prints a string
- * @str: input parameter
- * Return: void
- */
-void _puts(char *str)
-{
-	int i;
-
-	for (i = 0; *(str + i) != '\0'; i++)
-	{
-		_putchar(*(str + i));
-	}
-	_putchar('\n');
-}
-/**
- * _strlen - returns the length of a string
- * @s: input parameter
- * Return: int
- */
-int _strlen(char *s)
-{
-	int i;
-
-	for (i = 0; *(s + i) != '\0'; i++)
-	{
-	}
-
-	return (i);
-}
-/**
- * _strcmp - compares two strings
- * @s1: input parameter
- * @s2: input parameter
- * Return: Integer
- */
-int _strcmp(char *s1, char *s2)
-{
-	int num = 0;
-	int i = 0;
-
-	while (s1[i] == s2[i] && s1[i] != '\0')
-	{
-		i++;
-	}
-	num = s1[i] - s2[i];
-
-	return (num);
-}
-/**
- * str_concat - concatenates two strings
- * @s1: input parameter1
- * @s2: input parameter2
- * Return: concatenated string
+ *str_concat - back a pointer to array
+ *@s1: Array one
+ *@s2: Array two
+ *Return: Always an array dinamic
  */
 char *str_concat(char *s1, char *s2)
 {
-	int i,size, k;
-	char *array;
+	char *dst;
+	unsigned int i, j, size;
 
+	/*If the array is empty*/
 	if (s1 == NULL)
 		s1 = "";
+
 	if (s2 == NULL)
 		s2 = "";
 
+	/*count size total*/
 	size = (_strlen(s1) + _strlen(s2) + 1);
-	k = _strlen(s1);
-	array = malloc(size);
-	if (array == NULL)
-		return (NULL);
-	for (i = 0; i < size - 1; i++)
+
+	/*malloc*/
+	dst = (char *) malloc(size * sizeof(char));
+
+	if (dst == 0)
 	{
-		if (i < k)
-			array[i] = s1[i];
-		else
-			array[i] = s2[i - k];
+		return (NULL);
 	}
-	array[i] = '\0';
-	return (array);
+
+	/*Concatenate arrays*/
+	for (i = 0; *(s1 + i) != '\0'; i++)
+		*(dst + i) = *(s1 + i);
+
+	for (j = 0; *(s2 + j) != '\0'; j++)
+	{
+		*(dst + i) = *(s2 + j);
+		i++;
+	}
+	dst[i] = '\0';
+
+	return (dst);
+}
+
+/**
+ * _strcmp - compare two strings
+ * @s1: string one
+ * @s2: string two
+ * Return: returns an integer less  than,  equal  to,  or
+ * greater  than zero if s1 is found, respectively, to be
+ * less than, to match, or be greater than s2.
+ */
+int _strcmp(char *s1, char *s2)
+{
+	char *p1 = s1;
+	char *p2 = s2;
+
+	while (*p1 != '\0' && *p2 != '\0' && *p1 == *p2)
+	{
+		p1++;
+		p2++;
+	}
+	return (*p1 - *p2);
 }
