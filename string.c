@@ -38,7 +38,7 @@ int _strlen(char *s)
 	{
 	}
 
-	return (i + 1);
+	return (i);
 }
 /**
  * _strcmp - compares two strings
@@ -76,7 +76,7 @@ char *str_concat(char *s1, char *s2)
 		s2 = "";
 
 	size = (_strlen(s1) + _strlen(s2) + 1);
-	k = _strlen(s1) - 1;
+	k = _strlen(s1);
 	array = malloc(size);
 	if (array == NULL)
 		return (NULL);
