@@ -15,7 +15,6 @@ void _puts(char *str)
 	}
 	_putchar('\n');
 }
-
 /**
  * _strlen - returns a string
  * @s: integer to be used
@@ -32,7 +31,6 @@ int _strlen(const char *s)
 	}
 	return ((i + 1));
 }
-
 /**
  * _putchar - writes the character c to stdout
  * @c: The character to print
@@ -87,7 +85,6 @@ char *str_concat(char *s1, char *s2)
 
 	return (dst);
 }
-
 /**
  * _strcmp - compare two strings
  * @s1: string one
