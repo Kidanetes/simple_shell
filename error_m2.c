@@ -65,7 +65,7 @@ char *error_127(char **argv)
 	_strcat(error, hist_str);
 	_strcat(error, ": ");
 	_strcat(error, argv[0]);
-	_strcat(error, ": not found\n");
+	_strcat(error, ": No such file or directory\n");
 
 	free(hist_str);
 	return (error);
