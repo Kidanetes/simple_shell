@@ -12,7 +12,7 @@
 #define TOK_DELIM " \t\r\n\a"
 extern char **environ;
 void handle_signal(int signal);
-int *_error(char *argv, int number, char *args);
+int *_error(char *argv, char *args);
 int func_exit(char **args);
 void func_printenv(char **env);
 char **_which(char *foundpath);
@@ -26,7 +26,6 @@ int _strlen(const char *s);
 int _strcmp(char *s1, char *s2);
 char *_strstr(char *str1, char *str2);
 char *_strdup(char *str);
-char *_itoa(int num, int base);
 char *read_input(void);
 char **sparse_str(char *line, char **env);
 int execute(char **args, char **argv, int count, char *line, char **env);
