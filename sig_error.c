@@ -6,7 +6,7 @@
  */
 void handle_signal(int signal)
 {
-	char *prompt = {"\n{^_^} "};
+	char *prompt = {"\n{$} "};
 	(void) signal;
 
 	write(STDOUT_FILENO, prompt, _strlen(prompt));
