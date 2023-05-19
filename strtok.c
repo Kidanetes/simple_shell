@@ -21,7 +21,7 @@ int _strlen(char *s)
  */
 char **_strtok(char *str)
 {
-	int j = 0, i , len = 0;
+	int j = 0, i, len = 0;
 	char **array, *token;
 
 	if (str == NULL)
