@@ -6,14 +6,14 @@
  */
 int main(void)
 {
-        char *string, **array;
+	char *string, **array;
 	int j;
-        size_t n = 100;
+	size_t n = 100;
 
-        string = malloc(sizeof(char) * n);
+	string = malloc(sizeof(char) * n);
 	printf("$ ");
-        while (getline(&string, &n, stdin) != -1)
-        {
+	while (getline(&string, &n, stdin) != -1)
+	{
 		j = 0;
 		printf("%s", string);
 		array = _strtok(string);
@@ -22,16 +22,15 @@ int main(void)
 			printf("%s\n", array[j]);
 			j++;
 		}
-
 		while (j >= 0)
 		{
 			free(array[j]);
 			j--;
 		}
 		free (array);
-                printf("$ ");
-        }
-        printf("\n");
-        free(string);
-        return (0);
+		printf("$ ");
+	}
+	printf("\n");
+	free(string);
+	return (0);
 }
