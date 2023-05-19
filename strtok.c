@@ -1,4 +1,4 @@
-#include "shell.c"
+#include "shell.h"
 /**
  * _strlen - returns the length of a string
  * @s: input parameter
