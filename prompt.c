@@ -27,7 +27,7 @@ int main(void)
 			free(array[j]);
 			j--;
 		}
-		free (array);
+		free(array);
 		printf("$ ");
 	}
 	printf("\n");
