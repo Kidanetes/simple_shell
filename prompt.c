@@ -6,49 +6,36 @@ void free_maloc(char **array);
 void prompt(void);
 /**
  * main - reading the input from te user and displays it back
+ * @argc: number of arguments
+ * @argv: arguments
  *
  * Return: 0
  */
 int main(int argc __attribute__((unused)), char **argv __attribute__((unused)))
 {
 	char *string, **arg;
-	int /*j,*/ status;
+	int status;
 	size_t n = 100;
+	pid_t pid;
 
 	string = malloc(sizeof(char) * n);
-	/*write(STDOUT_FILENO, "$ ", 2);*/
 	while (1)
 	{
 		prompt();
-
-		/**if (isatty(STDIN_FILENO) == 1)
-		{
-			write(STDOUT_FILENO, "$ ", 2);
-		}*/
 		if (getline(&string, &n, stdin) == -1)
 		{
 			write(STDOUT_FILENO, "\n", 1);
 			break;
 		}
 		if (string == NULL)
-		{
 			continue;
-		}
-		/*j = 0;*/
 		arg = _strtok(string);
 		if (arg == NULL)
 		{
 			continue;
 		}
-
-		/**while (array != NULL && array[j] != NULL)
-		{
-			printf("%s\n", array[j]);
-			j++;
-		}*/
-		
-		
-		if (fork() == 0)
+		pid = fork();
+		if (pid == 0)
 		{
 			if (execv(arg[0], arg) == -1)
 			{
@@ -57,21 +44,11 @@ int main(int argc __attribute__((unused)), char **argv __attribute__((unused)))
 				perror(arg[0]);
 			}
 		}
-		else 
+		else if (pid > 0)
 			wait(&status);
+		else
+			perror(argv[0]);
 		free_maloc(arg);
-		/**while (arg[j] != NULL)
-		{
-			j++;
-		}
-		while (j >= 0)
-		{
-			free(arg[j]);
-			j--;
-		}*/
-		/*write(STDOUT_FILENO, "$ ", 2);*/
-		/**free(arg);*/
-		
 	}
 	free(string);
 	return (0);
