@@ -4,14 +4,15 @@
 #include <error.h>
 void free_maloc(char **array);
 void prompt(void);
+extern char **environ;
 /**
  * main - reading the input from te user and displays it back
  * @argc: number of arguments
  * @argv: arguments
- *
+ * @env: enviromt variable
  * Return: 0
  */
-int main(int argc __attribute__((unused)), char **argv __attribute__((unused)))
+int main(int argc __attribute__((unused)), char **argv, char **env)
 {
 	char *string, **arg;
 	int status;
@@ -37,11 +38,11 @@ int main(int argc __attribute__((unused)), char **argv __attribute__((unused)))
 		pid = fork();
 		if (pid == 0)
 		{
-			if (execv(arg[0], arg) == -1)
+			if (execve(arg[0], arg, env) == -1)
 			{
-				write(STDERR_FILENO, argv[0], _strlen(argv[0]));
-				write(STDERR_FILENO, ": ", 2);
-				perror(arg[0]);
+				/**write(STDERR_FILENO, argv[0], _strlen(argv[0]));
+				write(STDERR_FILENO, ": ", 2);*/
+				perror(argv[0]);
 			}
 		}
 		else if (pid > 0)
