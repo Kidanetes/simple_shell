@@ -1,6 +1,7 @@
 #include "shell.h"
 /**
  * get_path - gets the value of Path variable
+ * @env: enviromental variable
  *
  * Return: string of the path variable
  */
@@ -12,7 +13,6 @@ char *get_path(char **env)
 
 	while (env[i] != NULL)
 	{
-		
 		j = 0;
 		while (j < 4)
 		{
@@ -24,8 +24,8 @@ char *get_path(char **env)
 		{
 			k = 0;
 			len = _strlen(env[i]) - 5;
-			path = malloc(sizeof(char) *(len + 1));
-			while (k < len )
+			path = malloc(sizeof(char) * (len + 1));
+			while (k < len)
 			{
 				path[k] = env[i][k + 5];
 				k++;
@@ -41,7 +41,7 @@ char *get_path(char **env)
 /**
  * get_folder - find the location of the comman
  * @input: comman input from the terminal
- *
+ * @env: enviromental variable
  * Return: the path of the command
  */
 char *get_folder(char *input, char **env)
@@ -102,7 +102,7 @@ int _number_of_words(char *str)
 }
 /**
  * str_tok - tokinize the PATH enviromental variable
- * @path: value of the PATH variable
+ * @str: string to be tokinized
  *
  * Return: ppointer to tokens of Path variable
  */

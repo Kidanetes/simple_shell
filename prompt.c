@@ -1,10 +1,4 @@
 #include "shell.h"
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <error.h>
-void free_maloc(char **array);
-void prompt(void);
-extern char **environ;
 /**
  * main - reading the input from te user and displays it back
  * @argc: number of arguments
@@ -25,7 +19,8 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 		prompt();
 		if (getline(&string, &n, stdin) == -1)
 		{
-			write(STDOUT_FILENO, "\n", 1);
+			if (isatty(STDIN_FILENO) == 1)
+				write(STDOUT_FILENO, "\n", 1);
 			break;
 		}
 		if (string == NULL)
