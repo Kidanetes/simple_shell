@@ -14,7 +14,7 @@ extern char **environ;
  */
 int main(int argc __attribute__((unused)), char **argv, char **env)
 {
-	char *string, **arg;
+	char *string, **arg, *cmd;
 	int status;
 	size_t n = 100;
 	pid_t pid;
@@ -35,20 +35,33 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 		{
 			continue;
 		}
-		pid = fork();
-		if (pid == 0)
+		cmd = get_folder(arg[0]);
+		if (cmd != NULL)
 		{
-			if (execve(arg[0], arg, env) == -1)
+
+			pid = fork();
+			if (pid == 0)
 			{
-				/**write(STDERR_FILENO, argv[0], _strlen(argv[0]));
-				write(STDERR_FILENO, ": ", 2);*/
-				perror(argv[0]);
+				if (execve(cmd, &arg[1], env) == -1)
+				{
+					/**write(STDERR_FILENO, argv[0], _strlen(argv[0]));
+					 * write(STDERR_FILENO, ": ", 2);*/
+					perror(argv[0]);
+				}
 			}
+			else if (pid > 0)
+				wait(&status);
+			else
+				perror(argv[0]);
 		}
-		else if (pid > 0)
-			wait(&status);
 		else
-			perror(argv[0]);
+		{
+			write(STDERR_FILENO, argv[0], _strlen(argv[0]));
+			write(STDERR_FILENO, ": ", 2);
+			write(STDERR_FILENO, cmd, _strlen(cmd));
+			write(STDERR_FILENO, ": command not found\n", 20);
+		}
+		free(cmd);
 		free_maloc(arg);
 	}
 	free(string);
