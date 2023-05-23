@@ -35,14 +35,17 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 		{
 			continue;
 		}
-		cmd = get_folder(arg[0]);
+		cmd = _strdup(arg[0]);
+		free(arg[0]);
+		arg[0]  = get_folder(cmd);
+		free(cmd);
 		if (cmd != NULL)
 		{
 
 			pid = fork();
 			if (pid == 0)
 			{
-				if (execve(cmd, &arg[1], env) == -1)
+				if (execve(arg[0], arg, env) == -1)
 				{
 					/**write(STDERR_FILENO, argv[0], _strlen(argv[0]));
 					 * write(STDERR_FILENO, ": ", 2);*/
@@ -58,10 +61,9 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 		{
 			write(STDERR_FILENO, argv[0], _strlen(argv[0]));
 			write(STDERR_FILENO, ": ", 2);
-			write(STDERR_FILENO, cmd, _strlen(cmd));
+			write(STDERR_FILENO, arg[0], _strlen(arg[0]));
 			write(STDERR_FILENO, ": command not found\n", 20);
 		}
-		free(cmd);
 		free_maloc(arg);
 	}
 	free(string);

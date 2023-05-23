@@ -1,12 +1,4 @@
 #include "shell.h"
-#include <unistd.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-extern char **environ;
-char *get_path(void);
-char **str_tok(char *str);
-char *get_folder(char *input);
-int _number_of_words(char *str);
 /**
  * get_path - gets the value of Path variable
  *
@@ -60,7 +52,10 @@ char *get_folder(char *input)
 	char *path, **dir;
 
 	if (stat(input, &ptr) == 0)
-		return (input);
+	{
+		cmd3 = _strdup(input);
+		return (cmd3);
+	}
 	path = get_path();
 	if (path != NULL)
 	{

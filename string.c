@@ -1,7 +1,4 @@
 #include "shell.h"
-int _strcmp(char *s1, char *s2);
-char *str_concat(char *s1, char *s2);
-char *_strdup(char *str);
 /**
  * _strdup -  copy the string given as a parameter
  * @str: input parameter
