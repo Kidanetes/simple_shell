@@ -1,7 +1,7 @@
 #include "shell.h"
 /**
  * print_env - print te enviromental variables
- * env - pointer to env. variables
+ * @env: pointer to env. variables
  *
  * Return: nothing
  */

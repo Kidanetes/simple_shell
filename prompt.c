@@ -8,10 +8,8 @@
  */
 int main(int argc __attribute__((unused)), char **argv, char **env)
 {
-	char *string, **arg, *cmd;
-	int status;
+	char *string, **arg;
 	size_t n = 100;
-	pid_t pid;
 
 	string = malloc(sizeof(char) * n);
 	while (1)
@@ -30,33 +28,7 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 		{
 			continue;
 		}
-		cmd = _strdup(arg[0]);
-		free(arg[0]);
-		arg[0]  = get_folder(cmd, env);
-		free(cmd);
-		if (cmd != NULL)
-		{
-
-			pid = fork();
-			if (pid == 0)
-			{
-				if (execve(arg[0], arg, env) == -1)
-				{
-					perror(argv[0]);
-				}
-			}
-			else if (pid > 0)
-				wait(&status);
-			else
-				perror(argv[0]);
-		}
-		else
-		{
-			write(STDERR_FILENO, argv[0], _strlen(argv[0]));
-			write(STDERR_FILENO, ": ", 2);
-			write(STDERR_FILENO, arg[0], _strlen(arg[0]));
-			write(STDERR_FILENO, ": command not found\n", 20);
-		}
+		_exec(arg, argv, env);
 		free_maloc(arg);
 	}
 	free(string);
@@ -76,7 +48,7 @@ void prompt(void)
 
 }
 /**
- * free_maloc - frees pointer to pointer 
+ * free_maloc - frees pointer to pointer
  * dynamic allocation
  * @array: double pointer
  * Return: nothing
@@ -95,4 +67,42 @@ void free_maloc(char **array)
 		j--;
 	}
 	free(array);
+}
+/**
+ * _exec - executes the executable commands
+ * @arg: command and arguments
+ * @argv: arguments to main
+ * @env: enviromental variable
+ * Return: nothing
+ */
+void _exec(char **arg, char **argv, char **env)
+{
+	pid_t pid;
+	char *cmd;
+	int status;
+
+	cmd = _strdup(arg[0]);
+	free(arg[0]);
+	arg[0]  = get_folder(cmd, env);
+	free(cmd);
+	if (cmd != NULL)
+	{
+		pid = fork();
+		if (pid == 0)
+		{
+			if (execve(arg[0], arg, env) == -1)
+				perror(argv[0]);
+		}
+		else if (pid > 0)
+			wait(&status);
+		else
+			perror(argv[0]);
+	}
+	else
+	{
+		write(STDERR_FILENO, argv[0], _strlen(argv[0]));
+		write(STDERR_FILENO, ": ", 2);
+		write(STDERR_FILENO, arg[0], _strlen(arg[0]));
+		write(STDERR_FILENO, ": command not found\n", 20);
+	}
 }
