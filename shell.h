@@ -12,9 +12,9 @@
 
 extern char **environ;
 
-char *get_path(void);
+char *get_path(char **env);
 char **str_tok(char *str);
-char *get_folder(char *input);
+char *get_folder(char *input, char **env);
 int _number_of_words(char *str);
 int _strcmp(char *s1, char *s2);
 char *str_concat(char *s1, char *s2);

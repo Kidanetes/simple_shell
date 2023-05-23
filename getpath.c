@@ -4,30 +4,30 @@
  *
  * Return: string of the path variable
  */
-char *get_path(void)
+char *get_path(char **env)
 {
 	char *str = "PATH";
 	char *path;
 	int i = 0, j, len, k;
 
-	while (environ[i] != NULL)
+	while (env[i] != NULL)
 	{
 		
 		j = 0;
 		while (j < 4)
 		{
-			if (environ[i][j] != str[j])
+			if (env[i][j] != str[j])
 				break;
 			j++;
 		}
 		if (j == 4)
 		{
 			k = 0;
-			len = _strlen(environ[i]) - 5;
+			len = _strlen(env[i]) - 5;
 			path = malloc(sizeof(char) *(len + 1));
 			while (k < len )
 			{
-				path[k] = environ[i][k + 5];
+				path[k] = env[i][k + 5];
 				k++;
 			}
 			path[k] = '\0';
@@ -44,7 +44,7 @@ char *get_path(void)
  *
  * Return: the path of the command
  */
-char *get_folder(char *input)
+char *get_folder(char *input, char **env)
 {
 	struct stat ptr;
 	int i = 0;
@@ -56,7 +56,7 @@ char *get_folder(char *input)
 		cmd3 = _strdup(input);
 		return (cmd3);
 	}
-	path = get_path();
+	path = get_path(env);
 	if (path != NULL)
 	{
 		dir = str_tok(path);

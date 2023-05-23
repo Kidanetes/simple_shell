@@ -37,7 +37,7 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 		}
 		cmd = _strdup(arg[0]);
 		free(arg[0]);
-		arg[0]  = get_folder(cmd);
+		arg[0]  = get_folder(cmd, env);
 		free(cmd);
 		if (cmd != NULL)
 		{
@@ -47,8 +47,6 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 			{
 				if (execve(arg[0], arg, env) == -1)
 				{
-					/**write(STDERR_FILENO, argv[0], _strlen(argv[0]));
-					 * write(STDERR_FILENO, ": ", 2);*/
 					perror(argv[0]);
 				}
 			}
