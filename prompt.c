@@ -29,7 +29,7 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 			continue;
 		}
 		if (_strcmp(arg[0], "env") == 0)
-			print_env();
+			print_env(env);
 		else if (_strcmp(arg[0], "exit") == 0)
 			return (1);
 		else
