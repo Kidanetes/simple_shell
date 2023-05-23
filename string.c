@@ -22,8 +22,8 @@ char *_strdup(char *str)
 	array = malloc(size);
 	if (array == NULL)
 		return (NULL);
-	for (i = 0; i < size; i++, str++)
-		array[i] = *str;
+	for (i = 0; i < size; i++)
+		array[i] = str[i];
 	return (array);
 }
 /**
@@ -79,9 +79,3 @@ int _strcmp(char *s1, char *s2)
 
 	return (num);
 }
-int main (void)
-{
-	printf("%d\n",_strcmp("PATH2", "PATH"));
-	return (0);
-}
-
