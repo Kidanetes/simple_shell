@@ -10,8 +10,6 @@
 #include <sys/stat.h>
 #include <error.h>
 
-extern char **environ;
-
 char *get_path(char **env);
 char **str_tok(char *str);
 char *get_folder(char *input, char **env);
