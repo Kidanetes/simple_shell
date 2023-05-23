@@ -1,10 +1,4 @@
 #include "shell.h"
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <error.h>
-void free_maloc(char **array);
-void prompt(void);
-extern char **environ;
 /**
  * main - reading the input from te user and displays it back
  * @argc: number of arguments
