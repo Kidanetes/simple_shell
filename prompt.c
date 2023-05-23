@@ -28,7 +28,12 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 		{
 			continue;
 		}
-		_exec(arg, argv, env);
+		if (_strcmp(arg[0], "env") == 0)
+			print_env();
+		else if (_strcmp(arg[0], "exit") == 0)
+			exit();
+		else
+			_exec(arg, argv, env);
 		free_maloc(arg);
 	}
 	free(string);
