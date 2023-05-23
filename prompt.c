@@ -31,7 +31,7 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 		if (_strcmp(arg[0], "env") == 0)
 			print_env();
 		else if (_strcmp(arg[0], "exit") == 0)
-			exit();
+			return (1);
 		else
 			_exec(arg, argv, env);
 		free_maloc(arg);
