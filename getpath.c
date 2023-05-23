@@ -7,7 +7,6 @@ char *get_path(void);
 char **str_tok(char *str);
 char *get_folder(char *input);
 int _number_of_words(char *str);
-void free_maloc(char **array);
 /**
  * get_path - gets the value of Path variable
  *
@@ -149,38 +148,4 @@ char **str_tok(char *str)
 	}
 	array[j] = NULL;
 	return (array);
-}
-
-int main(int argc __attribute__((unused)), char **argv)
-{
-	char *input = "cd";
-	char *ptr;
-
-	ptr = get_folder(input);
-	if (ptr != NULL)
-		printf("%s$\n",ptr);
-	else 
-	{
-		write(STDERR_FILENO, argv[0], _strlen(argv[0]));
-		write(STDERR_FILENO, ": ", 2);
-		write(STDERR_FILENO, input, _strlen(input));
-		write(STDERR_FILENO, ": command not found\n", 20);
-	}
-	free(ptr);
-	return (0);
-}
-void free_maloc(char **array)
-{
-	int j = 0;
-
-	while (array[j] != NULL)
-	{
-		j++;
-	}
-	while (j >= 0)
-	{
-		free(array[j]);
-		j--;
-	}
-	free(array);
 }
