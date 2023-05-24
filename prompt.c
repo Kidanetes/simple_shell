@@ -33,7 +33,7 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 		else if (_strcmp(arg[0], "exit") == 0)
 		{
 			write(STDOUT_FILENO, "Exit\n", 5);
-			exit(1);
+			exit(0);
 		}
 		else
 			_exec(arg, argv, env);
