@@ -94,7 +94,7 @@ void _exec(char **arg, char **argv, char **env)
 	free(arg[0]);
 	arg[0]  = get_folder(cmd, env);
 	free(cmd);
-	if (cmd != NULL)
+	if (arg[0] != NULL)
 	{
 		pid = fork();
 		if (pid == 0)
