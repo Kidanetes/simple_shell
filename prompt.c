@@ -116,8 +116,6 @@ void _exec(char **arg, char **argv, char **env)
 	else
 	{
 		write(STDERR_FILENO, argv[0], _strlen(argv[0]));
-		write(STDERR_FILENO, ": ", 2);
-		write(STDERR_FILENO, arg[0], _strlen(arg[0]));
-		write(STDERR_FILENO, ": command not found\n", 20);
+		write(STDERR_FILENO, "command not found\n", 18);
 	}
 }
