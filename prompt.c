@@ -32,7 +32,7 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 			print_env(env);
 		else if (_strcmp(arg[0], "exit") == 0)
 		{
-			free_malloc(arg);
+			free_maloc(arg);
 			free(string);
 			write(STDOUT_FILENO, "Exit\n", 5);
 			exit(0);
