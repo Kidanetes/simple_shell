@@ -13,7 +13,6 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 
 	while (1)
 	{
-		string = malloc(sizeof(char) * n);
 		prompt();
 		if (getline(&string, &n, stdin) == -1)
 		{
