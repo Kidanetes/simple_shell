@@ -102,13 +102,13 @@ void _exec(char **arg, char **argv, char **env)
 			if (execve(arg[0], arg, env) == -1)
 			{
 				perror(argv[0]);
+				free_maloc(arg);
 				exit(1);
 			}
 		}
 		else if (pid > 0)
 		{
 			wait(&status);
-			free_maloc(arg);
 		}
 		else
 			perror(argv[0]);
