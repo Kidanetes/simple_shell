@@ -31,7 +31,10 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 		if (_strcmp(arg[0], "env") == 0)
 			print_env(env);
 		else if (_strcmp(arg[0], "exit") == 0)
-			break;
+		{
+			write(STDOUT_FILENO, "Exit\n", 5);
+			exit(1);
+		}
 		else
 			_exec(arg, argv, env);
 		free_maloc(arg);
@@ -96,7 +99,10 @@ void _exec(char **arg, char **argv, char **env)
 		if (pid == 0)
 		{
 			if (execve(arg[0], arg, env) == -1)
+			{
 				perror(argv[0]);
+				exit(1);
+			}
 		}
 		else if (pid > 0)
 			wait(&status);
