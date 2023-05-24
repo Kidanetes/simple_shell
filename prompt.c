@@ -11,9 +11,9 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 	char *string, **arg;
 	size_t n = 100;
 
-	string = malloc(sizeof(char) * n);
 	while (1)
 	{
+		string = malloc(sizeof(char) * n);
 		prompt();
 		if (getline(&string, &n, stdin) == -1)
 		{
@@ -24,6 +24,7 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 		if (string == NULL)
 			continue;
 		arg = _strtok(string);
+		free(string);
 		if (arg == NULL)
 		{
 			continue;
@@ -40,7 +41,6 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 			_exec(arg, argv, env);
 		free_maloc(arg);
 	}
-	free(string);
 	return (0);
 }
 /**
