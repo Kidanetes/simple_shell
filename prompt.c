@@ -106,7 +106,10 @@ void _exec(char **arg, char **argv, char **env)
 			}
 		}
 		else if (pid > 0)
+		{
 			wait(&status);
+			free_maloc(arg);
+		}
 		else
 			perror(argv[0]);
 	}
