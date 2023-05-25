@@ -41,7 +41,7 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 		free_maloc(arg);
 	}
 	free(string);
-	return (0);
+	return (127);
 }
 /**
  * prompt - displays the terminal
