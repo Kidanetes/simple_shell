@@ -37,7 +37,7 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 			exit(0);
 		}
 		else
-			_exec(arg, argv, env, &flag);
+			_exec(arg, argv, env);
 		free_maloc(arg);
 	}
 	free(string);
