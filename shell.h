@@ -10,7 +10,7 @@
 #include <sys/stat.h>
 #include <error.h>
 
-void _exec(char **arg, char **argv, char **env, int flag);
+void _exec(char **arg, char **argv, char **env, int *flag);
 void print_env(char **env);
 char *get_path(char **env);
 char **str_tok(char *str);
