@@ -103,7 +103,7 @@ void _exec(char **arg, char **argv, char **env, int *flag)
 			if (execve(arg[0], arg, env) == -1)
 			{
 				perror(argv[0]);
-				flag = 2;
+				*flag = 2;
 				/*free_maloc(arg);*/
 				/*exit(1);*/
 			}
@@ -121,7 +121,7 @@ void _exec(char **arg, char **argv, char **env, int *flag)
 		write(STDERR_FILENO, " 1:", 3);
 		write(STDERR_FILENO, cmd, _strlen(cmd));
 		write(STDERR_FILENO, ":not found\n", 11);
-		flag = 127;
+		*flag = 127;
 	}
 	free(cmd);
 }
