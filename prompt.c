@@ -10,6 +10,7 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 {
 	char *string, **arg;
 	size_t n = 100;
+	int i = 0;
 
 	string = malloc(sizeof(char) * n);
 	while (1)
@@ -37,11 +38,11 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 			exit(i);
 		}
 		else
-			_exec(arg, argv, env);
+			i = _exec(arg, argv, env);
 		free_maloc(arg);
 	}
 	free(string);
-	return (0);
+	return (i);
 }
 /**
  * prompt - displays the terminal
@@ -84,7 +85,7 @@ void free_maloc(char **array)
  * @env: enviromental variable
  * Return: nothing
  */
-void _exec(char **arg, char **argv, char **env)
+int _exec(char **arg, char **argv, char **env)
 {
 	pid_t pid;
 	char *cmd;
@@ -118,6 +119,8 @@ void _exec(char **arg, char **argv, char **env)
 		write(STDERR_FILENO, " 1:", 3);
 		write(STDERR_FILENO, cmd, _strlen(cmd));
 		write(STDERR_FILENO, ":not found\n", 11);
+		status = 127;
 	}
 	free(cmd);
+	return (status);
 }
