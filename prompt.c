@@ -91,6 +91,7 @@ void _exec(char **arg, char **argv, char **env, int *flag)
 	char *cmd;
 	int status;
 
+	*flag = 0;
 	cmd = _strdup(arg[0]);
 	free(arg[0]);
 	arg[0]  = get_folder(cmd, env);
