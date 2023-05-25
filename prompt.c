@@ -93,7 +93,7 @@ void _exec(char **arg, char **argv, char **env)
 	cmd = _strdup(arg[0]);
 	free(arg[0]);
 	arg[0]  = get_folder(cmd, env);
-	free(cmd);
+	/*free(cmd);*/
 	if (arg[0] != NULL)
 	{
 		pid = fork();
@@ -116,6 +116,9 @@ void _exec(char **arg, char **argv, char **env)
 	else
 	{
 		write(STDERR_FILENO, argv[0], _strlen(argv[0]));
-		write(STDERR_FILENO, "command not found\n", 18);
+		write(STDERR_FILENO, " 1:", 3);
+		write(STDERR_FILENO, cmd, _strlen(cmd));
+		write(STDERR_FILENO, "not found\n", 10);
 	}
+	free(cmd);
 }
