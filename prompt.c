@@ -10,7 +10,6 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 {
 	char *string, **arg;
 	size_t n = 100;
-	int flag = 0;
 
 	string = malloc(sizeof(char) * n);
 	while (1)
@@ -35,14 +34,14 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 		{
 			free_maloc(arg);
 			free(string);
-			exit(flag);
+			exit(0);
 		}
 		else
 			_exec(arg, argv, env, &flag);
 		free_maloc(arg);
 	}
 	free(string);
-	return (flag);
+	return (0);
 }
 /**
  * prompt - displays the terminal
@@ -85,13 +84,12 @@ void free_maloc(char **array)
  * @env: enviromental variable
  * Return: nothing
  */
-void _exec(char **arg, char **argv, char **env, int *flag)
+void _exec(char **arg, char **argv, char **env)
 {
 	pid_t pid;
 	char *cmd;
 	int status;
 
-	*flag = 0;
 	cmd = _strdup(arg[0]);
 	free(arg[0]);
 	arg[0]  = get_folder(cmd, env);
@@ -104,7 +102,6 @@ void _exec(char **arg, char **argv, char **env, int *flag)
 			if (execve(arg[0], arg, env) == -1)
 			{
 				perror(argv[0]);
-				*flag = 2;
 				/*free_maloc(arg);*/
 				/*exit(1);*/
 			}
@@ -122,7 +119,6 @@ void _exec(char **arg, char **argv, char **env, int *flag)
 		write(STDERR_FILENO, " 1:", 3);
 		write(STDERR_FILENO, cmd, _strlen(cmd));
 		write(STDERR_FILENO, ":not found\n", 11);
-		*flag = 127;
 	}
 	free(cmd);
 }
