@@ -88,6 +88,7 @@ void _exec(char **arg, char **argv, char **env)
 {
 	pid_t pid;
 	char *cmd;
+	int status;
 
 	cmd = _strdup(arg[0]);
 	free(arg[0]);
