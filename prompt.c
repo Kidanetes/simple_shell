@@ -115,9 +115,9 @@ void _exec(char **arg, char **argv, char **env)
 	else
 	{
 		write(STDERR_FILENO, argv[0], _strlen(argv[0]));
-		write(STDERR_FILENO, " 1:", 3);
+		write(STDERR_FILENO, ": 1: ", 3);
 		write(STDERR_FILENO, cmd, _strlen(cmd));
-		write(STDERR_FILENO, ":not found\n", 11);
+		write(STDERR_FILENO, " :not found\n", 11);
 	}
 	free(cmd);
 }
